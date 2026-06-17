@@ -5,6 +5,7 @@ Prepared from repository evidence in `trading-signals-ai` on branch `main`.
 Evidence policy used:
 - Verified from repository: explicit in source/config/scripts/files in this checkout
 - Inferred from code: derived from implementation behavior
+- Operationally provided (not in repo): manually supplied deployment/runtime metadata
 - Not Found in Repository: no verifiable evidence in this checkout
 
 ---
@@ -153,12 +154,27 @@ Do not commit secret values in `.env` files.
 
 # Deployment & Infrastructure
 
+## Operationally provided (not in repository)
+
+- Deployment mode: manual, managed on internal server (primary runtime for API/admin/landing)
+- API: `http://64.227.173.140:5020/api/`
+- Admin: `http://64.227.173.140:5174/`
+- Landing:
+  - Internal: `http://64.227.173.140:3020/`
+  - Vercel preview: `https://tradingsignals-ai.vercel.app/`
+  - Production domain: `https://www.tradingsignals.ai/`
+- MongoDB database name in use: `ts-stage` (connection credentials omitted)
+
+Secrets, passwords, and full credential-bearing connection strings are intentionally omitted from this document.
+
+## Verified from repository
+
 | Topic | Status | Notes |
 |------|--------|-------|
 | Monorepo deployment guide | Not Found in Repository | No root deployment runbook file found |
 | Admin deployment wiring | Verified from repository | `admin/middleware.ts` + `admin/vercel.json` |
 | Server deployment wiring | Verified from repository | `server/vercel.json` routes to `api/index.ts` |
-| Landing deployment config | Partial | Next project config exists; platform pipeline not explicitly documented |
+| Landing deployment config | Partial | Next project config exists; production domain documented operationally above |
 | Docker | Not Found in Repository | No Dockerfiles found in these three apps |
 | CI/CD workflows | Not Found in Repository | No `.github/workflows` found in this checkout |
 
@@ -195,5 +211,7 @@ Do not commit secret values in `.env` files.
 | Environment variables documented | Verified |
 | API/component boundaries documented | Verified |
 | Deployment process fully documented | Partial |
+| Manual deployment context captured | Verified (operationally provided) |
+| Secrets/passwords excluded from docs | Verified |
 | Infrastructure ownership documented | Partial |
 

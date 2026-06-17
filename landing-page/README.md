@@ -46,3 +46,11 @@ Variables from `env.example`:
 - `next.config.ts` allows remote image domains including Cloudinary.
 - SEO metadata and canonical base are configured in `app/layout.tsx` using `NEXT_PUBLIC_SITE_URL`.
 
+## Deployment notes
+
+- Deployment is currently manual and managed on an internal server.
+- Current landing URLs (provided operationally):
+  - `http://64.227.173.140:3020/`
+  - `https://tradingsignals-ai.vercel.app/`
+  - Production: `https://www.tradingsignals.ai/`
+

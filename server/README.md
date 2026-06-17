@@ -56,3 +56,10 @@ Optional:
 - API is mounted under `/api` in `app.ts`.
 - `vercel.json` routes all traffic to `api/index.ts` for serverless deployment.
 
+## Deployment notes
+
+- Deployment is currently manual and managed on an internal server.
+- Current API base (provided operationally): `http://64.227.173.140:5020/api/`
+- MongoDB database name in use: `ts-stage` (credentials omitted; configure via `DB_URI` in `.env`)
+- Do not store secrets or admin passwords in repository files.
+

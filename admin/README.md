@@ -38,3 +38,9 @@ Primary variables from `.env.example`:
 - Public: `/`, `/forgot-password`, `/reset-password`
 - Protected: `/admin/dashboard`, `/admin/blogs`, `/admin/blogs/create`, `/admin/blogs/edit/:blogId`
 
+## Deployment notes
+
+- Deployment is currently manual and managed on an internal server.
+- Current admin URL (provided operationally): `http://64.227.173.140:5174/`
+- Do not store admin credentials in repository files.
+
