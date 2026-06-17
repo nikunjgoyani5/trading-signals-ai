@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+/* Brand palette from https://www.tradingsignals.ai/ */
+@theme {
+  --color-background: #02081e;
+  --color-foreground: #f9f9f9;
+  --color-popover: #0b1736;
+  --color-popover-foreground: #f9f9f9;
+  --color-primary: #123dff;
+  --color-primary-foreground: #f9f9f9;
+  --color-secondary: #0b1736;
+  --color-secondary-foreground: #c7ccd2;
+  --color-muted: #0a1124;
+  --color-muted-foreground: #adb1b8;
+  --color-destructive: #f87171;
+  --color-border: rgb(255 255 255 / 0.1);
+  --color-input: rgb(255 255 255 / 0.1);
+  --color-ring: #12d7f5;
+  --color-tsai-bg: #010b24;
+  --color-tsai-surface: #02081e;
+  --color-tsai-surface-deep: #02164b;
+  --color-tsai-card: #0b1736;
+  --color-tsai-card-dark: #0a1124;
+  --color-tsai-accent: #123dff;
+  --color-tsai-accent-cyan: #12d7f5;
+  --color-tsai-accent-deep: #0012b8;
+  --color-tsai-text: #f9f9f9;
+  --color-tsai-muted: #c7ccd2;
+  --color-tsai-subtle: #adb1b8;
+  --color-tsai-border: rgb(255 255 255 / 0.08);
+  --color-tsai-glass: rgb(255 255 255 / 0.05);
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  background-color: var(--color-tsai-bg);
+  color: var(--color-tsai-text);
+}
+
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Pointer on all interactive controls */
+@layer base {
+  a[href],
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']),
+  label[for],
+  select:not(:disabled),
+  summary,
+  input[type='button']:not(:disabled),
+  input[type='submit']:not(:disabled),
+  input[type='reset']:not(:disabled),
+  input[type='checkbox']:not(:disabled),
+  input[type='radio']:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  select:disabled,
+  [aria-disabled='true'] {
+    cursor: not-allowed;
+  }
+}
+
+/* Smooth anchor-style sections on marketing pages */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* react-data-table-component */
+.tsai-data-table {
+  width: 100%;
+}
+
+.tsai-data-table .rdt_TableWrapper,
+.tsai-data-table .rdt_Table,
+.tsai-data-table .rdt_TableBody {
+  overflow: visible !important;
+}
+
+.tsai-data-table .rdt_Table {
+  min-width: 0;
+  width: 100%;
+}
+
+.tsai-data-table .rdt_TableHeadRow,
+.tsai-data-table .rdt_TableBody .rdt_TableRow {
+  display: flex !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Title column — shrink instead of forcing horizontal overflow */
+.tsai-data-table .rdt_TableCol:nth-child(2),
+.tsai-data-table .rdt_TableCell:nth-child(2) {
+  min-width: 0 !important;
+  flex: 1 1 0% !important;
+  overflow: hidden !important;
+}
+
+/* Actions column — never shrink or clip icons */
+.tsai-data-table .rdt_TableHeadRow .rdt_TableCol:last-child,
+.tsai-data-table .rdt_TableCell:last-child {
+  width: 148px !important;
+  min-width: 148px !important;
+  max-width: 148px !important;
+  flex: 0 0 148px !important;
+  flex-shrink: 0 !important;
+  overflow: visible !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
+
+.tsai-data-table .rdt_TableCell {
+  box-sizing: border-box !important;
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  background-color: transparent !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.tsai-data-table .rdt_TableHeadRow .rdt_TableCol {
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
+.tsai-data-table .rdt_TableBody .rdt_TableRow {
+  position: relative !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  background-color: transparent !important;
+  transition: border-color 0.2s ease !important;
+}
+
+/* Full-width, full-height row hover (edge to edge inside the table) */
+.tsai-data-table .rdt_TableBody .rdt_TableRow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+}
+
+.tsai-data-table .rdt_TableBody .rdt_TableRow:hover::before {
+  background-color: rgba(18, 215, 245, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(18, 215, 245, 0.08);
+}
+
+.tsai-data-table .rdt_TableBody .rdt_TableRow:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.tsai-data-table .rdt_TableBody .rdt_TableRow .rdt_TableCell {
+  position: relative;
+  z-index: 1;
+}
+
+.tsai-data-table .rdt_Pagination {
+  background: transparent !important;
+}
+
+.blog-preview-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.15) transparent;
+}
+
+.blog-preview-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.blog-preview-scroll::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: rgb(255 255 255 / 0.15);
+}

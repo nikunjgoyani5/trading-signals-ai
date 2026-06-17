@@ -1,0 +1,714 @@
+@import "tailwindcss";
+
+@custom-variant 3xl (@media (width >=1620px));
+
+@theme {
+  --font-hoves: var(--font-hoves), sans-serif;
+
+  /* color */
+  --color-mirage: #0b152d;
+  --color-cosmos: #1c263c;
+  --color-titan-white: #e6eeff;
+  --color-seashell-blue: #e6eeff;
+  --color-dark-blue: #0012b8;
+  --color-vivid-cyan: #00f0ff;
+  --color-tealish-blue: #182138;
+  --color-cyan-blue: #c7ccd2;
+}
+
+/* ── Base ── */
+@layer base {
+  body {
+    @apply bg-[#010b24] text-white font-normal;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --font-inter: "Inter", sans-serif;
+  --font-mono: "Space Mono", monospace;
+}
+
+/* ── Responsive Container ── */
+@media (max-width: 1400px) {
+  .features-container {
+    padding-left: 80px !important;
+    padding-right: 80px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .features-container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+/* ── Marquee ── */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+@layer utilities {
+  .animate-border-spin {
+    animation: border-spin 3s linear infinite;
+  }
+
+  @keyframes border-spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+/* ── Glow Button ── */
+.glow-btn {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  background: linear-gradient(
+    135deg,
+    rgba(13, 20, 35, 0.9) 0%,
+    rgba(8, 14, 25, 0.95) 100%
+  );
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.glow-btn .your-button {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.3) 20%,
+    white 50%,
+    rgba(255, 255, 255, 0.3) 80%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: textGlowScan 2.5s ease-in-out infinite;
+}
+
+.glow-btn:hover .your-button {
+  animation-duration: 1.5s;
+}
+
+@keyframes textGlowScan {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ── Shine Effect (merged clean) ── */
+.shine {
+  animation: shine 5s ease-in-out infinite;
+  mask-image: linear-gradient(to right, #0000 30%, #eee 50%, #0000 70%);
+  -webkit-mask-image: linear-gradient(to right, #0000 30%, #eee 50%, #0000 70%);
+  mask-size: 150%;
+  -webkit-mask-size: 150%;
+}
+
+@keyframes shine {
+  0% {
+    mask-position: 200%;
+    -webkit-mask-position: 200%;
+  }
+
+  100% {
+    mask-position: -100%;
+    -webkit-mask-position: -100%;
+  }
+}
+
+/* ── Alternate Shine Sweep ── */
+@keyframes shine-sweep {
+  0% {
+    mask-position: -200% 0%;
+    -webkit-mask-position: -200% 0%;
+  }
+
+  100% {
+    mask-position: 200% 0%;
+    -webkit-mask-position: 200% 0%;
+  }
+}
+
+.shine {
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    white 50%,
+    rgba(255, 255, 255, 0.2) 80%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    white 50%,
+    rgba(255, 255, 255, 0.2) 80%,
+    transparent 100%
+  );
+  mask-size: 200% 100%;
+  -webkit-mask-size: 200% 100%;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  animation: shine-sweep 3s linear infinite;
+  will-change: mask-position;
+}
+
+/* @keyframes particle-fall-left {
+  0% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% { transform: translate(120px, 750px) scale(1.2); opacity: 0; }
+}
+
+@keyframes particle-fall-right {
+  0% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% { transform: translate(-120px, 750px) scale(1.2); opacity: 0; }
+} */
+
+/* ── Text Glow Sweep ── */
+@keyframes textSweep {
+  0% {
+    mask-position: 10% 0%;
+    -webkit-mask-position: 150% 0%;
+  }
+
+  100% {
+    mask-position: -50% 0%;
+    -webkit-mask-position: -150% 0%;
+  }
+}
+
+.animate-text-glow {
+  mask-size: 200% 100%;
+  -webkit-mask-size: 200% 100%;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  animation: textSweep 4s linear infinite;
+}
+
+/* ── Rotation ── */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Particle Animations ── */
+@keyframes particle-fall-left {
+  0% {
+    transform: translate(0, 0) scale(0.4);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.8;
+  }
+
+  80% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translate(350, 750px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-fall-right {
+  0% {
+    transform: translate(0, 0) scale(0.4);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.8;
+  }
+
+  80% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translate(-120px, 750px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.shine {
+  animation: 7s ease-in-out infinite shine;
+  mask-image: linear-gradient(to right, #0000 30%, #eeeeeeb6 50%, #0000 70%);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #0000 30%,
+    #eeeeeeb6 50%,
+    #0000 70%
+  );
+  mask-size: 150%;
+  -webkit-mask-size: 150%;
+}
+
+/* ── Floating Particles ── */
+@keyframes float-a {
+  0% {
+    transform: translate(0px, 0px);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate(5px, -14px);
+  }
+
+  88% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-3px, -26px);
+    opacity: 0;
+  }
+}
+
+@keyframes float-b {
+  0% {
+    transform: translate(0px, 0px);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  45% {
+    transform: translate(-7px, -12px);
+  }
+
+  88% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(4px, -24px);
+    opacity: 0;
+  }
+}
+
+@keyframes float-c {
+  0% {
+    transform: translate(0px, 0px);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate(8px, -18px);
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-2px, -30px);
+    opacity: 0;
+  }
+}
+
+/* ── Custom Scrollbar ── */
+.blog-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #979da1 transparent;
+}
+
+.blog-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.blog-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.blog-scrollbar::-webkit-scrollbar-thumb {
+  background: #979da1;
+  border-radius: 9999px;
+}
+
+@keyframes radialGlow {
+  0% {
+    background-position: -4rem -1.5rem;
+  }
+  25% {
+    background-position: 4rem -1.5rem;
+  }
+  50% {
+    background-position: 4rem 1.5rem;
+  }
+  75% {
+    background-position: -4rem 1.5rem;
+  }
+  100% {
+    background-position: -4rem -1.5rem;
+  }
+}
+
+/* base glow layer */
+.get-access-glow {
+  --x-size: 25;
+  --y-size: 50;
+  z-index: 0;
+  will-change: transform;
+  border-radius: 99px;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(
+    25% 50%,
+    rgb(255, 255, 255) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: calc((var(--x-size) / 25) * 100%)
+    calc((var(--y-size) / 50) * 100%);
+  background-repeat: no-repeat;
+  background-position: -4rem -1.5rem;
+  transition: background-position 0.5s ease-in-out,
+    background-size 0.5s ease-in-out;
+  animation: radialGlow 4s linear infinite;
+}
+.get-access-glow.outter {
+  filter: blur(15px);
+}
+.get-access-glow.inner {
+  filter: none;
+}
+
+/* HOVER — outer doubles, inner triples, both snap to center */
+.get-access-btn:hover .get-access-glow.outter {
+  --x-size: 50;
+  --y-size: 100;
+}
+.get-access-btn:hover .get-access-glow.inner {
+  --x-size: 75;
+  --y-size: 181.159;
+}
+.get-access-btn:hover .get-access-glow {
+  background-position: center !important;
+}
+
+/* dark inner fill */
+.get-access-btn-bg {
+  z-index: 0;
+  will-change: transform;
+  background-color: rgb(31, 58, 116);
+  border-radius: 99px;
+  position: absolute;
+  inset: 2px;
+  overflow: hidden;
+}
+
+/* ── UNIFIED ENERGY FIELD SYSTEM ── */
+@keyframes unified-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.18;
+  }
+
+  50% {
+    transform: translate(-8%, -4%) scale(1.15);
+    opacity: 0.35;
+  }
+
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.18;
+  }
+}
+
+.ambient-glow-wrapper {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  width: 80%;
+  height: 120%;
+  right: -10%;
+}
+
+.glow-core {
+  position: absolute;
+  inset: 0;
+  filter: blur(90px);
+  animation: unified-drift 12s ease-in-out infinite;
+}
+
+.glow-bloom {
+  position: absolute;
+  inset: 0;
+  filter: blur(130px);
+  animation: unified-drift 15s ease-in-out infinite reverse;
+}
+
+/*
+ * Carousel layout — enforces horizontal-only motion for Embla loop mode.
+ *
+ * The vertical "rising card" artifact happens when:
+ *   1. The Embla viewport/container has no fixed height, so clone slides
+ *      can briefly paint at their natural document position (bottom of stack)
+ *      before Embla translates them into the track.
+ *   2. `containScroll` forces Embla to recalculate scroll bounds mid-loop,
+ *      causing a Y-axis shift on the cloned slide.
+ *
+ * These rules lock every slide to the same row height and hide any
+ * overflow so clones are invisible until Embla slides them in from the side.
+ */
+
+/* ─── Viewport ─────────────────────────────────────────────────────────────
+   overflow-hidden clips the track; without this, cloned loop slides are
+   briefly visible at their off-screen positions.                          */
+.carousel__viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* ─── Track (the scrollable inner container) ────────────────────────────
+   display:flex + will-change:transform are what Embla expects.
+   backface-visibility:hidden prevents sub-pixel flicker on GPU compositing.
+   touch-action:pan-y allows vertical page scroll while Embla owns X-axis. */
+.carousel__container {
+  display: flex;
+  align-items: stretch; /* all slides stretch to tallest sibling height */
+  touch-action: pan-y;
+  backface-visibility: hidden;
+  will-change: transform; /* promote track to its own GPU layer */
+}
+
+/* ─── Slides ────────────────────────────────────────────────────────────
+   flex-shrink:0 is mandatory — allows slides to keep their declared width
+   and not collapse as Embla translates the track.
+
+   min-width controls how many slides are visible at once:
+     - 100%      → 1 slide  (mobile-first)
+     - 50%       → 2 slides (tablet)
+     - 33.333%   → 3 slides (desktop)
+   Adjust or use CSS custom properties to match your design.
+
+   overflow:hidden on each slide prevents internal content from expanding
+   the slide beyond its lane height.                                       */
+.carousel__slide {
+  flex: 0 0 100%; /* 1 slide on mobile */
+  min-width: 0; /* prevents flex blowout */
+  overflow: hidden;
+  /* Horizontal gap between slides — use padding rather than margin so
+     Embla's internal size calculations stay accurate.                    */
+  padding-right: 1rem; /* adjust to your design token */
+}
+
+@media (min-width: 640px) {
+  .carousel__slide {
+    flex: 0 0 50%; /* 2 slides on tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel__slide {
+    flex: 0 0 33.333%; /* 3 slides on desktop */
+  }
+}
+
+/* ─── Slide inner card ──────────────────────────────────────────────────
+   height:100% makes the card fill its slide lane so all cards are the
+   same height regardless of content length — eliminates height-mismatch
+   as the source of vertical drift.                                        */
+.carousel__slide-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+  will-change: transform;
+}
+
+.dust {
+  width: 3px;
+  height: 3px;
+  background: #fff;
+  position: absolute;
+  pointer-events: none;
+}
+
+.section-py {
+  @apply py-10 md:py-20 3xl:py-25;
+}
+
+.section-pt {
+  @apply pt-10 md:pt-20 3xl:pt-25;
+}
+
+.section-pb {
+  /* @apply pb-10 md:pb-20 3xl:pb-25; */
+  @apply pb-10 md:pb-20 3xl:pb-25;
+}
+
+@layer base {
+  /* ── Tiptap Editor Styles ── */
+  .ProseMirror p.is-editor-empty:first-child::before {
+    @apply content-[attr(data-placeholder)] float-left text-slate-800 pointer-events-none h-0;
+  }
+  .ProseMirror h1 {
+    @apply text-4xl font-extrabold mb-5 text-slate-100 leading-tight;
+  }
+  .ProseMirror h2 {
+    @apply text-2xl font-bold mt-8 mb-4 text-slate-200;
+  }
+  .ProseMirror p {
+    @apply mb-5 text-slate-400;
+  }
+  .ProseMirror ul {
+    @apply list-disc pl-6 mb-5 text-slate-400;
+  }
+  .ProseMirror ol {
+    @apply list-decimal pl-6 mb-5 text-slate-400;
+  }
+  .ProseMirror li {
+    @apply mb-1.5;
+  }
+  .ProseMirror blockquote {
+    @apply border-l-3 border-cyan-400 pl-5 italic text-slate-500 my-7;
+  }
+  .ProseMirror strong {
+    @apply text-slate-200;
+  }
+  .ProseMirror em {
+    @apply text-slate-400;
+  }
+  .ProseMirror pre {
+    @apply bg-[#0d121f] text-sky-300 font-mono p-3 rounded-lg my-6 border border-white/5 whitespace-pre-wrap;
+  }
+  .ProseMirror pre code {
+    @apply text-inherit p-0 bg-transparent text-[0.8rem];
+  }
+  .ProseMirror:focus {
+    @apply outline-none;
+  }
+
+  /* ── Blog Content Styling (Published View) ── */
+  .blog-prose h1 {
+    @apply text-3xl md:text-4xl font-bold text-white mt-10 mb-5 leading-tight;
+  }
+  .blog-prose h2 {
+    @apply text-2xl md:text-3xl font-semibold text-white mt-8 mb-4 leading-snug;
+  }
+  .blog-prose h3 {
+    @apply text-xl md:text-2xl font-semibold text-white mt-6 mb-3 leading-normal;
+  }
+  .blog-prose p {
+    @apply mb-6;
+  }
+  .blog-prose ul {
+    @apply list-disc mb-6 pl-6 list-outside;
+  }
+  .blog-prose ol {
+    @apply list-decimal mb-6 pl-6 list-outside;
+  }
+  .blog-prose li {
+    @apply mb-2 pl-2;
+  }
+  .blog-prose strong,
+  .blog-prose b {
+    @apply font-bold text-white;
+  }
+  .blog-prose a {
+    @apply text-blue-500 underline underline-offset-2 hover:text-blue-400;
+  }
+  .blog-prose img {
+    @apply max-w-full h-auto rounded-xl my-8;
+  }
+  .blog-prose pre {
+    @apply max-w-full overflow-x-auto bg-[#0d121f] p-6 rounded-xl border border-cyan-400/15 my-10 font-mono text-[0.9em] leading-relaxed whitespace-pre;
+  }
+  .blog-prose pre code {
+    @apply bg-transparent p-0 border-none text-sky-300 whitespace-pre-wrap break-normal;
+  }
+  .blog-prose :not(pre) > code {
+    @apply bg-cyan-400/10 text-cyan-400 px-1.5 py-1 rounded-md text-[0.9em];
+  }
+  .blog-prose table {
+    @apply block max-w-full overflow-x-auto border-collapse my-8;
+  }
+  .blog-prose iframe {
+    @apply max-w-full rounded-xl;
+  }
+}
+
+.head-size {
+  @apply text-3xl md:text-4xl 3xl:text-5xl font-normal leading-tight 3xl:leading-14;
+}
+
+.desc-size {
+  @apply text-base 3xl:text-[19px] font-light text-cyan-blue;
+}
+
+/* 1- (20-16) , 2- (22-18) */
+.card-title-size1 {
+  @apply text-lg xl:text-lg 2xl:text-xl 3xl:text-xl;
+}
+
+.card-desc-size1 {
+  @apply text-sm lg:text-base xl:text-base 2xl:text-base 3xl:text-base text-cyan-blue font-light;
+}
+
+.card-title-size2 {
+  @apply text-lg lg:text-lg xl:text-xl 2xl:text-[21px] 3xl:text-[22px];
+}
+
+.card-desc-size2 {
+  @apply text-[15px] text-base lg:text-base xl:text-[17px] text-cyan-blue font-light;
+}

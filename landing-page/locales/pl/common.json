@@ -1,0 +1,389 @@
+{
+    "navbar": {
+        "features": "Funkcje",
+        "strategies": "Strategie",
+        "testimonials": "Opinie",
+        "blog": "Blog",
+        "faq": "FAQ",
+        "login": "Zaloguj się",
+        "signup": "Zarejestruj się",
+        "cta": "Rozpocznij handel"
+    },
+    "hero": {
+        "users": "10 000+ aktywnych traderów",
+        "title": "Handluj mądrzej, rośnij szybciej dzięki Trading Signal AI",
+        "description": "Handluj mądrzej dzięki sygnałom opartym na AI, uporządkowanym strategiom i analizom w czasie rzeczywistym wszystko na jednej zintegrowanej platformie.",
+        "integration": "Zintegrowane z najlepszymi giełdami",
+        "cta": "Rozpocznij handel",
+        "watchDemo": "Obejrzyj demo",
+        "demoDuration": "0:58 min"
+    },
+    "features": {
+        "title": "Funkcje platformy",
+        "heading": "Wszystko, czego potrzebujesz do zyskownego handlu",
+        "description": "Kompletny ekosystem handlowy stworzony dla nowoczesnych traderów kryptowalutowych. Od sygnałów, przez egzekucję, aż po analitykę.",
+        "cards": {
+            "aiSignals": {
+                "title": "Sygnały oparte na AI",
+                "desc": "Zaawansowane modele uczenia maszynowego analizują wzorce rynkowe, nastroje i dane on-chain w celu generowania sygnałów handlowych o wysokim prawdopodobieństwie."
+            },
+            "multiExchange": {
+                "title": "Integracja z wieloma giełdami",
+                "desc": "Połącz się z Binance, Coinbase, Kraken, Bybit, OKX i nie tylko. Handluj na wszystkich głównych giełdach z jednego panelu."
+            },
+            "automation": {
+                "title": "Automatyzacja + handel ręczny",
+                "desc": "Wykonuj transakcje automatycznie lub korzystaj z naszych sygnałów do handlu ręcznego. Pełna kontrola nad Twoim stylem handlu i zarządzaniem ryzykiem."
+            },
+            "analytics": {
+                "title": "Analityka w czasie rzeczywistym",
+                "desc": "Śledź wyniki, analizuj transakcje i optymalizizuj strategie dzięki naszemu wszechstronnemu panelowi analitycznemu i narzędziom raportowania."
+            }
+        }
+    },
+    "strategy": {
+        "strategybadge": "Strategie AI",
+        "title": "Wybierz swoje kanały handlowe",
+        "description": "Uzyskaj dostęp do specjalistycznych strumieni sygnałów opartych na sztucznej inteligencji, z których każdy jest zbudowany dla określonej strategii - od skalpowania i swing tradingu po momentum i automatyzację.",
+        "popular": "Najpopularniejsze",
+        "card_cta": "Handluj teraz",
+        "monthlyAvg": "Średnia miesięczna",
+        "cards": {
+            "prime": {
+                "title": "Prime",
+                "desc": "Zaawansowane sygnały AI oparte na głębokiej analizie rynku i modelach prawdopodobieństwa.",
+                "roi": "+47.3%",
+                "price": "$149/mies."
+            },
+            "momentum": {
+                "title": "Momentum",
+                "desc": "Podążaj za silnymi trendami i łap potężne ekspansje rynkowe.",
+                "roi": "+38.6%",
+                "price": "$49/mies."
+            },
+            "core": {
+                "title": "Core",
+                "desc": "Ustrukturyzowane transakcje swingowe na głównych aktywach o wysokim prawdopodobieństwie realizacji.",
+                "roi": "+24.2%",
+                "price": "$49/mies."
+            },
+            "alts": {
+                "title": "Alts",
+                "desc": "Wyselekcjonowane przez AI możliwości na altcoinach z silnym momentum i płynnością.",
+                "roi": "+62.8%",
+                "price": "$49/mies."
+            },
+            "flash": {
+                "title": "Flash",
+                "desc": "Ultraszybkie transakcje dla skalpowania i warunków dużej zmienności rynku.",
+                "roi": "+31.4%",
+                "price": "$49/mies."
+            },
+            "system": {
+                "title": "System",
+                "desc": "Zautomatyzowane sygnały dla spójnego i pasywnego handlu.",
+                "roi": "+28.9%",
+                "price": "$59/mies."
+            },
+            "struct": {
+                "title": "Struct",
+                "desc": "Zdyscyplinowany handel z kontrolowanym zarządzaniem ryzykiem.",
+                "roi": "+33.7%",
+                "price": "$79/mies."
+            },
+            "assist": {
+                "title": "Assist",
+                "desc": "Proste, prowadzone sygnały zaprojektowane dla początkujących traderów.",
+                "roi": "+18.5%",
+                "price": "$39/mies."
+            },
+            "vol": {
+                "title": "Vol",
+                "desc": "Wychwytuj ruchy o dużej zmienności na wielu interwałach czasowych.",
+                "roi": "+31.4%",
+                "price": "$49/mies."
+            },
+            "hybrid": {
+                "title": "Hybrid",
+                "desc": "Elastyczna strategia łącząca krótko- i średnioterminowe podejścia handlowe.",
+                "roi": "+28.9%",
+                "price": "$59/mies."
+            }
+        }
+    },
+    "gettingStarted": {
+        "stepbadge": "Krok",
+        "title": "Pierwsze kroki",
+        "heading": "Rozpocznij handel w 3 prostych krokach",
+        "description": "Uruchom system w kilka minut. Nie wymaga skomplikowanej konfiguracji.",
+        "stepsList": [
+            {
+                "title": "Zarejestruj się i połącz",
+                "desc": "Bezpiecznie połącz swoje konto giełdowe za pośrednictwem API. Obsługujemy Binance, Coinbase, Kraken, Bybit, OKX i inne. Twoje środki pozostają na Twojej giełdzie."
+            },
+            {
+                "title": "Wybierz kanały sygnałowe",
+                "desc": "Wybieraj spośród 8 strategii opartych na sztucznej inteligencji w oparciu o Twoją tolerancję ryzyka i cele handlowe. Łącz wiele strategii w celu dywersyfikacji."
+            },
+            {
+                "title": "Handluj i monitoruj",
+                "desc": "Wykonuj transakcje automatycznie lub ręcznie. Śledź wyniki w czasie rzeczywistym dzięki naszemu zaawansowanemu panelowi analitycznemu."
+            }
+        ],
+        "stats": {
+            "registeredUsers": "Zarejestrowani użytkownicy",
+            "aum": "Aktywa pod zarządzaniem",
+            "pnl": "Całkowity PNL obserwujących"
+        }
+    },
+    "stats": {
+        "registeredUsers": "Zarejestrowani użytkownicy",
+        "aum": "Aktywa pod zarządzaniem",
+        "totalPnl": "Całkowity PNL obserwujących"
+    },
+    "tradingChannels": {
+        "title": "Kanały handlowe",
+        "heading": "Handluj z celem, a nie zgaduj",
+        "description": "Ustrukturyzowane strategie wspierane przez sztuczną inteligencję, zaprojektowane w celu wychwytywania możliwości związanych ze zmiennością, trendami i momentum rynkowym.",
+        "cards": {
+            "scalping": {
+                "title": "Skalpowanie",
+                "desc": "Strategie szybkiego reagowania zbudowane w celu uchwycenia krótkoterminowych ruchów cenowych i skoków zmienności z błyskawiczną egzekucją.",
+                "badges": ["Vol", "Flash"]
+            },
+            "swing": {
+                "title": "Swing Trading",
+                "desc": "Ustrukturyzowane strategie skoncentrowane na średnioterminowych trendach i możliwościach o wysokim prawdopodobieństwie na rynkach głównych oraz altcoinach.",
+                "badges": ["Core", "Alts"]
+            },
+            "aiStrategy": {
+                "title": "Strategia AI",
+                "desc": "Flagowa strategia oparta na AI, analizująca strukturę rynku, nastroje i zmienność, aby zidentyfikować dominujące układy rynkowe.",
+                "badges": ["Prime"]
+            },
+            "lowRisk": {
+                "title": "Niskie ryzyko",
+                "desc": "Uproszczone sygnały handlowe zaprojektowane z myślą o prowadzonej egzekucji i kontrolowanej ekspozycji, idealne dla początkujących i stabilnego handlu.",
+                "badges": ["Assist"]
+            },
+            "highRisk": {
+                "title": "Wysokie ryzyko, wysoka nagroda",
+                "desc": "Agresywne strategie ukierunkowane na silne ekspansje cenowe i możliwości handlowe o wysokim momentum.",
+                "badges": ["Momentum", "Hybrid"]
+            },
+            "futures": {
+                "title": "Kontrakty terminowe (Futures)",
+                "desc": "Zaawansowane strategie skoncentrowane na ustrukturyzowanej egzekucji, systematycznych sygnałach i kontroli ryzyka na poziomie portfela.",
+                "badges": ["Struct", "System"]
+            }
+        },
+        "cta": "Eksploruj"
+    },
+    "whyUs": {
+        "title": "Dlaczego my",
+        "heading": "Stworzone dla poważnych traderów",
+        "description": "Dbamy o każdy szczegół, abyś mógł skupić się na tym, co najważniejsze: zyskownym handlu.",
+        "items": [
+            {
+                "title": "Zabezpieczenia na poziomie bankowym",
+                "desc": "Twoje klucze API są szyfrowane algorytmem AES-256. Nigdy nie mamy dostępu do wypłat Twoich środków."
+            },
+            {
+                "title": "Pełna przejrzystość",
+                "desc": "Śledzenie wyników w czasie rzeczywistym. Zobacz każdą transakcję, każdy zysk/stratę (P&L), każdy szczegół. Brak ukrytych opłat."
+            },
+            {
+                "title": "Zaawansowana analityka",
+                "desc": "Szczegółowe raporty, historia transakcji i wskaźniki wydajności w celu optymalizacji Twojej strategii."
+            },
+            {
+                "title": "Natychmiastowa egzekucja",
+                "desc": "Wykonywanie transakcji w ułamku sekundy gwarantuje, że nigdy nie przegapisz okazji na dynamicznych rynkach."
+            }
+        ]
+    },
+    "testimonials": {
+        "title": "Opinie",
+        "heading": "Zaufało nam ponad 1000 traderów",
+        "description": "Prawdziwe wyniki od prawdziwych traderów korzystających z Trading Signals AI",
+        "fullScreen": "Pełny ekran",
+        "exitFullScreen": "Wyjście",
+        "enterFullScreenAria": "Włącz pełny ekran",
+        "exitFullScreenAria": "Wyjdź z pełnego ekranu",
+        "playVideoAria": "Odtwórz wideo",
+        "pauseVideoAria": "Wstrzymaj wideo",
+        "quotes": [
+            "\"Trading Signals AI zmieniło zasady gry dla mnie, jako początkującego w świecie handlu kryptowalutami. Przed dołączeniem wahałem się, czy wejść na rynek, obawiając się kosztownych błędów.\"",
+            "\"Dzięki Trading Signals AI znalazłem przyjazną społeczność i bogactwo zasobów, które prowadzą mnie w mojej podróży handlowej.\"",
+            "\"Nie jestem w stanie wystarczająco podziękować Trading Signals AI za zmianę mojej ścieżki w handlu krypto. Jako zupełny początkujący czułem się przytłoczony złożonością rynku i nie wiedziałem, od czego zacząć.\"",
+            "\"Ich platforma jest intuicyjna i przyjazna dla użytkownika, a sygnały zapewniają jasne punkty wejścia i wyjścia, dzięki czemu początkujący tacy jak ja mogą łatwo je śledzić.\""
+        ]
+    },
+    "faq": {
+        "badge": "FAQ",
+        "title": "Często zadawane pytania",
+        "description": "Wszystko, co musisz wiedzieć o Trading Signals AI",
+        "searchPlaceholder": "Szukaj w FAQ...",
+        "noResults": "Nie znaleziono FAQ pasujących do \"{{query}}\"",
+        "questions": [
+            {
+                "q": "Czym jest Trading Signals AI?",
+                "a": "Trading Signals AI to zaawansowana platforma algorytmiczna, która dostarcza sygnały klasy instytucjonalnej i zautomatyzowane rozwiązania handlowe zasilane przez modele głębokiego uczenia."
+            },
+            {
+                "q": "Czym są kanały sygnałowe?",
+                "a": "Kanały sygnałowe to wyspecjalizowane strumienie algorytmiczne zaprojektowane dla określonych warunków rynkowych, takich jak skalpowanie, momentum lub podążanie za trendem."
+            },
+            {
+                "q": "Czy mogę zautomatyzować swoje transakcje?",
+                "a": "Tak, nasza platforma obsługuje pełną automatyzację poprzez integrację API z głównymi giełdami, takimi jak Binance, Bybit i OKX."
+            },
+            {
+                "q": "Czy platforma jest odpowiednia dla początkujących?",
+                "a": "Absolutnie. Mimo że jest potężna, nasz kanał Assist został specjalnie zaprojektowany z myślą o prostych, prowadzonych sygnałach dla nowicjuszy w handlu."
+            },
+            {
+                "q": "Czy wyniki są przejrzyste?",
+                "a": "Tak. Szczycimy się pełną przejrzystością. Wyniki każdego sygnału są śledzone w czasie rzeczywistym i widoczne na naszym pulpicie nawigacyjnym."
+            },
+            {
+                "q": "Czy moje konto jest bezpieczne?",
+                "a": "Używamy szyfrowania AES-256 dla kluczy API i wymagamy tylko uprawnień 'Trade' (Handel). Nigdy nie mamy dostępu do wypłaty Twoich środków."
+            }
+        ]
+    },
+    "blog": {
+        "title": "Blog",
+        "heading": "Najnowsze wiadomości i spostrzeżenia",
+        "description": "Bądź na bieżąco dzięki naszej analizie eksperckiej, przewodnikom handlowym i głównym ogłoszeniom dotyczącym platformy.",
+        "posts": [
+            {
+                "title": "Strategie handlowe AI dla NVDA na rok 2026: Wykresy i przewodnik po analityce AI",
+                "desc": "Odkryj, jak analityka oparta na sztucznej inteligencji przekształca strategie handlowe dla NVDA w 2026 roku, z rzeczywistymi analizami wykresów i analizą sygnałów."
+            },
+            {
+                "title": "Jak handlować na wybiciach XAUUSD za pomocą filtru ATR i wsparcia AI...",
+                "desc": "Dowiedz się, jak zidentyfikować układy wybić XAUUSD o wysokim prawdopodobieństwie za pomocą filtrów zmienności ATR połączonych z potwierdzeniem sygnału AI."
+            },
+            {
+                "title": "Wiadomości PR: Zautomatyzuj pomysły handlowe w kilka sekund: TradeOS uruchamia...",
+                "desc": "TradeOS wprowadza nową warstwę automatyzacji, która w ciągu kilku sekund przekształca surowe pomysły handlowe w możliwe do wykonania strategie za pomocą sztucznej inteligencji."
+            }
+        ],
+        "viewMore": "Wyświetl więcej",
+        "cta": "Pokaż więcej",
+        "errorHeading": "Ups! Nie udało się załadować blogów.",
+        "tryAgain": "Spróbuj ponownie",
+        "emptyState": "Nie znaleziono żadnych blogów. Zajrzyj tu później!",
+        "loading": "Ładowanie...",
+        "backToBlog": "Wróć do bloga"
+    },
+    "generateBlog": {
+        "promptPlaceholder": "Wpisz temat lub treść promptu na bloga…",
+        "generate": "Wygeneruj blog",
+        "generating": "Generowanie…",
+        "loadingTitle": "Generujemy Twój blog…",
+        "loadingHint": "To może potrwać kilka sekund.",
+        "emptyTitle": "Twój blog AI pojawi się tutaj",
+        "emptyHint": "Wpisz temat w polu poniżej i kliknij Wygeneruj blog.",
+        "copy": "Kopiuj",
+        "copied": "Skopiowano!",
+        "copyAria": "Skopiuj HTML bloga",
+        "regenerate": "Wygeneruj ponownie",
+        "regenerateAria": "Wygeneruj blog ponownie",
+        "publish": "Opublikuj blog",
+        "coverImage": "Obraz okładki",
+        "aiTries": "Regeneracje AI: {{count}}/{{max}}",
+        "uploadNew": "Prześlij nowy",
+        "noImage": "Nie wybrano obrazu okładki",
+        "imageHint": "Prześlij własny lub wygeneruj go za pomocą AI",
+        "generatingImage": "Tworzenie Twojego arcydzieła...",
+        "upload": "Prześlij",
+        "generateAI": "Generuj AI",
+        "errors": {
+            "generateFailed": "Nie udało się wygenerować bloga. Spróbuj ponownie.",
+            "emptyResponse": "Serwer zwrócił pustą treść. Spróbuj ponownie.",
+            "generic": "Coś poszło nie tak."
+        }
+    },
+    "starttoday": {
+        "badge": "Zacznij już dziś",
+        "heading": "Gotowy na transformację swojego handlu?",
+        "description": "Dołącz do tysięcy zyskownych traderów, którzy na co dzień korzystają z sygnałów opartych na sztucznej inteligencji, aby podejmować trafniejsze decyzje.",
+        "cta": "Rozpocznij handel"
+    },
+    "footer": {
+        "description": "Sygnały kryptowalutowe oparte na AI dla mądrzejszych decyzji. Zaufało nam ponad 12 000 traderów na całym świecie.",
+        "sections": {
+            "product": "Produkt",
+            "legal": "Prawne"
+        },
+        "links": {
+            "features": "Funkcje",
+            "strategies": "Strategie",
+            "testimonials": "Opinie",
+            "faq": "FAQ",
+            "contact": "Kontakt",
+            "privacy": "Polityka Prywatności",
+            "terms": "Warunki Korzystania",
+            "risk": "Ujawnienie Ryzyka",
+            "cookie": "Polityka Cookies"
+        },
+        "copyright": "© 2026 Trading Signals AI. Wszelkie prawa zastrzeżone.",
+        "disclaimer": "Handel wiąże się ze znacznym ryzykiem i nie jest odpowiedni dla każdego inwestora. Wyniki historyczne nie wskazują na przyszłe rezultaty. To nie jest porada finansowa."
+    },
+    "editBlog": {
+        "pageTitle": "Edytuj blog",
+        "exitEditor": "Zamknij edytor",
+        "editingDraft": "Edytowanie szkicu",
+        "discard": "Odrzuć",
+        "publish": "Opublikuj",
+        "saving": "Zapisywanie…",
+        "titlePlaceholder": "Tytuł Twojego bloga…",
+        "words": "{{count}} słów",
+        "readTime": "{{count}} min czytania",
+        "finalizeUpdate": "Sfinalizuj aktualizację",
+        "finalizeDesc": "Przejrzyj zmiany powyżej. Po zapisaniu blog zostanie zaktualizowany na całej platformie, a pamięć podręczna zostanie odświeżona.",
+        "savingChanges": "Zapisywanie zmian…",
+        "updateBlogPost": "Aktualizuj wpis na blogu",
+        "generationsRemaining": "pozostało {{count}} generacji",
+        "generationsRemaining_one": "pozostała {{count}} generacja",
+        "tooltips": {
+            "bold": "Pogrubienie",
+            "italic": "Kursywa",
+            "h1": "Nagłówek 1",
+            "h2": "Nagłówek 2",
+            "list": "Lista punktowana",
+            "orderedList": "Lista numerowana",
+            "code": "Blok kodu",
+            "quote": "Cytat",
+            "undo": "Cofnij",
+            "redo": "Ponów"
+        }
+    },
+    "exchangePartners": {
+        "badge": "Partnerzy giełdowi",
+        "title": "Obsługiwane giełdy kryptowalut",
+        "desc": "„Jeśli nie masz konta krypto, możesz zarejestrować się u naszych obsługiwanych partnerów giełdowych”",
+        "subtitle": "Nasza platforma jest połączona z 15 różnymi giełdami",
+        "getStarted": "Rozpocznij",
+        "cta": "Utwórz konto",
+        "exchanges": {
+            "binance": "Największa na świecie giełda kryptowalut z wysoką płynnością i zaawansowanymi narzędziami handlowymi.",
+            "binanceFutures": "Handluj kontraktami futures na krypto z dźwignią do 125x na wiodącej platformie na świecie.",
+            "bybitUta": "Jednolite konto handlowe (UTA) dla rynku spot, instrumentów pochodnych i opcji na Bybit.",
+            "bitgetSpot": "Handel spot z głęboką płynnością i szerokim wyborem par kryptowalutowych.",
+            "bitgetFutures": "Potężny handel kontraktami futures z funkcjami kopiowania transakcji i niskimi opłatami.",
+            "mexc": "Szybko rozwijająca się giełda oferująca różnorodne aktywa krypto i niskie opłaty transakcyjne.",
+            "okx": "Globalna giełda krypto oferująca handel spot, futures oraz usługi DeFi.",
+            "kucoin": "Zaufana giełda z setkami kryptowalut i zaawansowanymi funkcjami.",
+            "htx": "Dawniej Huobi - weteran wśród giełd z głęboką płynnością i globalnym zasięgiem.",
+            "blofin": "Profesjonalna platforma handlu kontraktami futures z konkurencyjnymi opłatami i głęboką płynnością.",
+            "bitfinex": "Zaawansowane narzędzia handlowe i głęboka płynność dla profesjonalnych traderów krypto.",
+            "kraken": "Niezawodna giełda krypto znana z silnego bezpieczeństwa i przejrzystości.",
+            "gate": "Bezpieczna platforma oferująca szeroką gamę opcji handlu aktywami cyfrowymi.",
+            "exmo": "Europejska giełda krypto z obsługą walut fiat i szeroką gamą par handlowych.",
+            "xt": "Platforma handlowa zintegrowana społecznościowo z szerokim wyborem aktywów krypto."
+        }
+    }
+}
