@@ -4,6 +4,7 @@
         "strategies": "Strategies",
         "testimonials": "Testimonials",
         "blog": "Blog",
+        "contact": "Contact",
         "faq": "FAQ",
         "login": "Login",
         "signup": "Sign Up",
@@ -311,6 +312,34 @@
         "heading": "Ready to Transform Your Trading?",
         "description": "Join thousands of profitable traders using AI-powered signals to make smarter decisions every day.",
         "cta": "Start Trading Now"
+    },
+    "contactPage": {
+        "badge": "Contact Us",
+        "title": "Get in Touch With Us",
+        "description": "Reach out for support, partnerships, or questions about Trading Signals AI.",
+        "form": {
+            "firstName": "First Name",
+            "firstNamePlaceholder": "Enter your first name",
+            "lastName": "Last Name",
+            "lastNamePlaceholder": "Enter your last name",
+            "email": "Email Address",
+            "emailPlaceholder": "Enter your email address",
+            "phone": "Phone Number",
+            "phonePlaceholder": "Your phone number",
+            "message": "Message",
+            "messagePlaceholder": "Write your message here...",
+            "submit": "Submit",
+            "submitting": "Submitting...",
+            "successMessage": "Your email was successfully received and a ticket has been generated.",
+            "ticketLabel": "Ticket: {{ticket}}",
+            "errorMessage": "Something went wrong. Please try again later.",
+            "errors": {
+                "required": "This field is required.",
+                "emailInvalid": "Enter a valid email address.",
+                "phoneInvalid": "Enter a valid phone number for the selected country.",
+                "messageMin": "Message must be at least 10 characters."
+            }
+        }
     },
     "footer": {
         "description": "AI-powered crypto trading signals for smarter decisions. Trusted by 12,000+ traders worldwide.",

@@ -8,9 +8,10 @@ import {
   useUpdateBlogMutation,
 } from '../redux/api/blogsApi'
 import { getApiErrorMessage } from '../utils/apiError'
-import { extractTitleFromHtml, prepareBlogHtmlForSave } from '../utils/blogContent'
+import { extractTitleFromHtml, prepareBlogHtmlForSave, buildCoverImageTopic } from '../utils/blogContent'
+import { MAX_BLOG_AI_COVER_GENERATIONS } from '../constants/blogCoverGeneration'
 
-const MAX_IMAGE_REGEN = 3
+const MAX_IMAGE_REGEN = MAX_BLOG_AI_COVER_GENERATIONS
 
 export default function EditBlogPage() {
   const { blogId = '' } = useParams<{ blogId: string }>()
@@ -26,6 +27,7 @@ export default function EditBlogPage() {
   const [content, setContent] = useState('')
   const [coverImage, setCoverImage] = useState('')
   const [regenCount, setRegenCount] = useState(0)
+  const [maxRegen, setMaxRegen] = useState(MAX_IMAGE_REGEN)
   const [actionError, setActionError] = useState<string | null>(null)
   const [hydratedId, setHydratedId] = useState<string | null>(null)
 
@@ -34,11 +36,16 @@ export default function EditBlogPage() {
     setHydratedId(blog.id)
     setContent(blog.content)
     setCoverImage(blog.coverImage || '')
+    setRegenCount(blog.aiCoverGenerationCount)
   }, [blog, hydratedId])
 
   const handleImageGenerate = async () => {
-    const topic = blog?.title?.trim() || extractTitleFromHtml(content, '')
-    if (!topic) {
+    if (!blog) return
+    const imagePrompt = buildCoverImageTopic({
+      title: blog.title,
+      content,
+    })
+    if (!imagePrompt) {
       setActionError('Add blog content with a title before generating a cover image.')
       return
     }
@@ -46,11 +53,22 @@ export default function EditBlogPage() {
 
     setActionError(null)
     try {
-      const result = await generateImage({ prompt: topic }).unwrap()
+      const result = await generateImage({ prompt: imagePrompt, blogId: blog.id }).unwrap()
       setCoverImage(result.url)
-      setRegenCount((count) => count + 1)
+      if (result.aiCoverGenerationCount !== undefined) {
+        setRegenCount(result.aiCoverGenerationCount)
+      } else {
+        setRegenCount((count) => count + 1)
+      }
+      if (result.maxAiCoverGenerations !== undefined) {
+        setMaxRegen(result.maxAiCoverGenerations)
+      }
     } catch (error) {
-      setActionError(getApiErrorMessage(error, 'Failed to generate cover image.'))
+      const message = getApiErrorMessage(error, 'Failed to generate cover image.')
+      setActionError(message)
+      if (message.toLowerCase().includes('limit reached')) {
+        setRegenCount(maxRegen)
+      }
     }
   }
 
@@ -104,8 +122,8 @@ export default function EditBlogPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl space-y-6">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+    <div className="blog-edit-layout mx-auto flex max-w-7xl flex-col gap-6">
+      <div className="shrink-0 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.18em] text-tsai-accent-cyan">
             Edit
@@ -122,13 +140,13 @@ export default function EditBlogPage() {
       </div>
 
       {actionError && (
-        <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+        <div className="shrink-0 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
           {actionError}
         </div>
       )}
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] xl:items-start">
-        <div className="space-y-5 xl:sticky xl:top-6">
+      <div className="blog-edit-grid grid min-h-0 flex-1 gap-6 xl:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] xl:items-stretch">
+        <div className="space-y-5 xl:sticky xl:top-6 xl:max-h-full xl:overflow-y-auto xl:overscroll-contain blog-preview-scroll">
           <BlogCoverImageSelector
             coverImage={coverImage}
             onImageChange={setCoverImage}
@@ -136,7 +154,7 @@ export default function EditBlogPage() {
             isGeneratingImage={isGeneratingImage}
             disabled={isSaving}
             regenCount={regenCount}
-            maxRegen={MAX_IMAGE_REGEN}
+            maxRegen={maxRegen}
           />
           <div className="rounded-2xl border border-white/10 bg-tsai-card/40 p-5">
             <label
@@ -155,7 +173,8 @@ export default function EditBlogPage() {
           </div>
         </div>
 
-        <BlogCreatePreviewPanel
+        <div className="flex min-h-0 min-w-0 flex-col">
+          <BlogCreatePreviewPanel
           content={content}
           isLoading={false}
           isSaving={isSaving}
@@ -166,6 +185,7 @@ export default function EditBlogPage() {
           showPublish={false}
           showRegenerate={false}
         />
+        </div>
       </div>
     </div>
   )

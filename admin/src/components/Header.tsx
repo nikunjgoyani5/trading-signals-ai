@@ -6,6 +6,8 @@ const pageTitles: Record<string, string> = {
   '/admin': 'Dashboard',
   '/admin/dashboard': 'Dashboard',
   '/admin/blogs': 'All Blogs',
+  '/admin/enquiries': 'Enquiries',
+  '/admin/blogs/create': 'Generate Blog',
   '/admin/users': 'Users',
   '/admin/settings': 'Settings',
 }

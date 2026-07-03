@@ -13,6 +13,7 @@ import { applyStatusTransition, assertPublishable } from '../utils/blogStatus.js
 import type { UploadedFile } from '../utils/upload.js'
 import type { ParsedBlogBody } from '../utils/parseBlogBody.js'
 import { findBlogByIdentifier } from '../utils/blogIdentifier.js'
+import { validateAiCoverGenerationCountForCreate } from '../constants/blogCoverGeneration.js'
 
 export type BlogListResult = {
   blogs: IBlog[]
@@ -202,10 +203,15 @@ export async function createBlog(
     assertPublishable(draftBlog)
   }
 
+  const aiCoverGenerationCount = validateAiCoverGenerationCountForCreate(
+    payload.aiCoverGenerationCount,
+  )
+
   const newBlog = await Blog.create({
     title: extractedTitle,
     content,
     coverImage: payload.coverImage,
+    aiCoverGenerationCount,
     slug,
     status: targetStatus,
     publishedAt: targetStatus === 'published' ? new Date() : null,

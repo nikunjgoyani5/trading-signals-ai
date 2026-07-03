@@ -3,10 +3,15 @@ import { z } from 'zod'
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
-  PORT: z.coerce.number().int().positive().default(3000),
+  PORT: z.coerce.number().int().positive().default(5001),
   API_PUBLIC_URL: z.string().url().optional(),
-  CORS_ORIGIN: z.string().default('https://trading-signal-admin-6tr1nyxam-manav01logicgo-3215s-projects.vercel.app/'),
-  CLIENT_URL: z.string().default('https://trading-signal-admin-6tr1nyxam-manav01logicgo-3215s-projects.vercel.app/'),
+  CORS_ORIGIN: z
+    .string()
+    .default(
+      'http://localhost:3000,http://localhost:3001,http://localhost:5173,https://trading-signal-admin-6tr1nyxam-manav01logicgo-3215s-projects.vercel.app',
+    ),
+  CLIENT_URL: z.string().default('http://localhost:5173'),
+  LANDING_PAGE_URL: z.string().default('http://localhost:3000'),
   DB_URI: z
     .string()
     .min(1)
@@ -16,17 +21,35 @@ const envSchema = z.object({
   JWT_ACCESS_EXPIRES_IN: z.string().default('15m'),
   JWT_REFRESH_EXPIRES_IN: z.string().default('7d'),
   JWT_REMEMBER_REFRESH_EXPIRES_IN: z.string().default('30d'),
-  ADMIN_EMAIL: z.string().email().default('admin123@yopmail.com'),
+  ADMIN_EMAIL: z.string().email().default('admin@example.com'),
   ADMIN_PASSWORD: z.string().min(8).default('Admin@12345'),
   ADMIN_NAME: z.string().default('Admin'),
   OPENAI_API_KEY: z.string().optional(),
   OPENAI_IMAGE_MODEL: z.string().default('gpt-image-1'),
+  /** AI cover generations allowed per blog (3–5). Defaults to 3. */
+  MAX_BLOG_AI_COVER_GENERATIONS: z.coerce.number().int().min(3).max(5).optional(),
   CLOUDINARY_CLOUD_NAME: z.string().min(1),
   CLOUDINARY_API_KEY: z.string().min(1),
   CLOUDINARY_API_SECRET: z.string().min(1),
   BREVO_API_KEY: z.string().optional(),
+  /** volumeDayTraders-compatible: email|xkeysib-... or email|xsmtpsib-... */
+  BREVO_SMTP_KEY: z.string().optional(),
   BREVO_SENDER_EMAIL: z.string().email().optional(),
-  BREVO_SENDER_NAME: z.string().default('Trading Signals Admin'),
+  BREVO_SENDER_NAME: z.string().default('Trading Signals'),
+  INQUIRY_NOTIFY_EMAIL: z.string().email().default('tradingsignals@yopmail.com'),
+  GMAIL_USER: z
+    .string()
+    .optional()
+    .transform((value) => (value?.trim() ? value.trim() : undefined))
+    .pipe(z.string().email().optional()),
+  GMAIL_APP_PASSWORD: z
+    .string()
+    .optional()
+    .transform((value) => (value?.trim() ? value.trim() : undefined)),
+  EMAIL_USE_GMAIL_FOR_DISPOSABLE: z
+    .enum(['true', 'false'])
+    .optional()
+    .transform((value) => value !== 'false'),
 })
 
 const parsed = envSchema.safeParse(process.env)

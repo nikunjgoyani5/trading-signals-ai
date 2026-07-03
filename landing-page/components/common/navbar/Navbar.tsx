@@ -69,6 +69,7 @@ export default function Navbar() {
     { label: t("navbar.testimonials"), href: "/#testimonials" },
     { label: t("navbar.faq"), href: "/#faq" },
     { label: t("navbar.blog"), href: "/blogs" },
+    { label: t("navbar.contact"), href: "/contact" },
   ];
 
   return (

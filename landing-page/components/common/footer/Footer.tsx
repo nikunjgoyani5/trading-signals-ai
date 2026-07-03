@@ -11,7 +11,7 @@ const productLinks = [
   { key: "strategies", href: "/#strategies" },
   { key: "testimonials", href: "/#testimonials" },
   { key: "faq", href: "/#faq" },
-  { key: "contact", href: "/#contact" },
+  { key: "contact", href: "/contact" },
 ];
 
 const legalLinks = [

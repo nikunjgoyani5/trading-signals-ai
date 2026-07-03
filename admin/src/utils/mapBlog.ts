@@ -43,6 +43,10 @@ export function mapApiBlogToBlog(raw: ApiBlogDocument): Blog {
     slug,
     content: raw.content?.trim() ?? '',
     coverImage: raw.coverImage?.trim() ?? '',
+    aiCoverGenerationCount:
+      typeof raw.aiCoverGenerationCount === 'number' && raw.aiCoverGenerationCount >= 0
+        ? raw.aiCoverGenerationCount
+        : 0,
     status: normalizeStatus(raw.status),
     publishedAt: formatDate(raw.publishedAt),
     archivedAt: formatDate(raw.archivedAt),

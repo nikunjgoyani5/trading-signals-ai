@@ -3,38 +3,12 @@ import { AppError } from '../utils/AppError.js'
 import { HttpStatus } from '../constants/httpStatus.js'
 import { parseOpenAIError } from '../utils/openaiError.js'
 import { urlToBase64 } from '../utils/imageUtils.js'
-
-const COVER_PROMPT = (topic: string) =>
-  `A natural, candid photograph for a blog cover about: ${topic}.
-
-The image should look like a real, everyday photo taken by a human:
-slightly imperfect composition
-natural lighting (not cinematic or dramatic)
-realistic environment (home office, workplace, desk setup)
-minor clutter, irregular details, lived-in feel
-
-Include:
-a real person or realistic workspace
-normal objects (laptop, coffee mug, notebook, monitors)
-
-Camera style:
-shot on a phone or DSLR (35mm or 50mm)
-slight grain, natural shadows, no dramatic effects
-
-Avoid completely:
-anything futuristic or sci-fi
-perfect symmetry or overly clean setups
-glowing lights, neon effects
-ultra sharp HDR, over-processed look
-CGI, 3D render, digital art, concept art
-“AI aesthetic” (too polished, too perfect)
-
-Style reference:
-looks like a casual Unsplash or candid LinkedIn photo
-
-Output:
-realistic, slightly imperfect, human feel
-16:9 aspect ratio`
+import { Blog } from '../models/blog.model.js'
+import {
+  getMaxBlogAiCoverGenerations,
+} from '../constants/blogCoverGeneration.js'
+import mongoose from 'mongoose'
+import { buildCoverImagePrompt } from '../utils/coverImagePrompt.js'
 
 type ImageGenerationResponse = {
   data?: Array<{ url?: string; b64_json?: string }>
@@ -76,7 +50,7 @@ async function requestImage(
     },
     body: JSON.stringify({
       model,
-      prompt: COVER_PROMPT(prompt),
+      prompt: buildCoverImagePrompt(prompt),
       n: 1,
       size: '1024x1024',
     }),
@@ -100,7 +74,10 @@ async function requestImage(
 }
 
 /** Returns a base64 data URL for preview in the UI — nothing saved on disk. */
-export async function generateCoverImage(prompt: string): Promise<{ url: string }> {
+export async function generateCoverImage(
+  prompt: string,
+  options?: { blogId?: string },
+): Promise<{ url: string; aiCoverGenerationCount?: number; maxAiCoverGenerations: number }> {
   const trimmed = prompt?.trim()
   if (!trimmed) {
     throw new AppError('Prompt is required to generate an image.', HttpStatus.BAD_REQUEST)
@@ -110,25 +87,80 @@ export async function generateCoverImage(prompt: string): Promise<{ url: string 
     throw new AppError('OPENAI_API_KEY is not configured.', HttpStatus.INTERNAL_SERVER_ERROR)
   }
 
-  let lastError: string | null = null
+  const maxGenerations = getMaxBlogAiCoverGenerations()
+  let reservedBlogId: string | null = null
 
-  for (const model of getModelsToTry()) {
-    try {
-      const image = await requestImage(model, trimmed)
-      if (!image) continue
-
-      const url = await toDataImageUrl(image)
-      return { url }
-    } catch (error) {
-      lastError = error instanceof Error ? error.message : 'Image generation failed'
-      if (error instanceof AppError && error.statusCode < 500) {
-        throw error
-      }
+  if (options?.blogId) {
+    if (!mongoose.Types.ObjectId.isValid(options.blogId)) {
+      throw new AppError('Invalid blog id.', HttpStatus.BAD_REQUEST)
     }
+
+    const reserved = await Blog.findOneAndUpdate(
+      {
+        _id: options.blogId,
+        $expr: { $lt: [{ $ifNull: ['$aiCoverGenerationCount', 0] }, maxGenerations] },
+      },
+      { $inc: { aiCoverGenerationCount: 1 } },
+      { new: true },
+    )
+
+    if (!reserved) {
+      const existing = await Blog.findById(options.blogId).select('aiCoverGenerationCount')
+      if (!existing) {
+        throw new AppError('Blog not found.', HttpStatus.NOT_FOUND)
+      }
+      const currentCount = existing.aiCoverGenerationCount ?? 0
+      if (currentCount >= maxGenerations) {
+        throw new AppError(
+          `AI cover generation limit reached (${maxGenerations} per blog). Upload an image instead.`,
+          HttpStatus.TOO_MANY_REQUESTS,
+        )
+      }
+      throw new AppError(
+        'Unable to reserve AI cover generation slot. Please try again.',
+        HttpStatus.CONFLICT,
+      )
+    }
+
+    reservedBlogId = String(reserved._id)
   }
 
-  throw new AppError(
-    lastError || 'No image model available. Check OPENAI_API_KEY or OPENAI_IMAGE_MODEL.',
-    HttpStatus.BAD_GATEWAY,
-  )
+  let lastError: string | null = null
+
+  try {
+    for (const model of getModelsToTry()) {
+      try {
+        const image = await requestImage(model, trimmed)
+        if (!image) continue
+
+        const url = await toDataImageUrl(image)
+
+        if (reservedBlogId) {
+          const blog = await Blog.findById(reservedBlogId).select('aiCoverGenerationCount')
+          return {
+            url,
+            aiCoverGenerationCount: blog?.aiCoverGenerationCount ?? maxGenerations,
+            maxAiCoverGenerations: maxGenerations,
+          }
+        }
+
+        return { url, maxAiCoverGenerations: maxGenerations }
+      } catch (error) {
+        lastError = error instanceof Error ? error.message : 'Image generation failed'
+        if (error instanceof AppError && error.statusCode < 500) {
+          throw error
+        }
+      }
+    }
+
+    throw new AppError(
+      lastError || 'No image model available. Check OPENAI_API_KEY or OPENAI_IMAGE_MODEL.',
+      HttpStatus.BAD_GATEWAY,
+    )
+  } catch (error) {
+    if (reservedBlogId) {
+      await Blog.updateOne({ _id: reservedBlogId }, { $inc: { aiCoverGenerationCount: -1 } })
+    }
+    throw error
+  }
 }

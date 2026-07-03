@@ -23,7 +23,7 @@ npm run dev
 Primary variables from `.env.example`:
 
 - `VITE_API_BASE_URL` (default `/api`)
-- `VITE_API_PROXY_TARGET` (local API target, e.g. `http://localhost:5000`)
+- `VITE_API_PROXY_TARGET` (local API target, default `http://localhost:5001`)
 - `VITE_VERCEL_PROTECTION_BYPASS` (optional; needed when proxy target is Vercel-protected)
 - `VITE_BLOG_PUBLIC_URL` (public landing/blog URL)
 
@@ -36,7 +36,9 @@ Primary variables from `.env.example`:
 ## Main routes
 
 - Public: `/`, `/forgot-password`, `/reset-password`
-- Protected: `/admin/dashboard`, `/admin/blogs`, `/admin/blogs/create`, `/admin/blogs/edit/:blogId`
+- Protected: `/admin/dashboard`, `/admin/blogs`, `/admin/blogs/create`, `/admin/blogs/edit/:blogId`, `/admin/enquiries`
+
+For full project handover, see `../TECHNICAL_HANDOVER.md`.
 
 ## Deployment notes
 

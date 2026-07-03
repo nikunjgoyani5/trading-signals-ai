@@ -10,6 +10,7 @@ export type ParsedBlogBody = {
   content?: string
   coverImage?: string
   status?: BlogStatus
+  aiCoverGenerationCount?: number
 }
 
 export type ParsedBlogRequest = {
@@ -21,6 +22,13 @@ export type ParsedBlogRequest = {
 function asOptionalString(value: unknown): string | undefined {
   if (value === undefined || value === null) return undefined
   return String(value)
+}
+
+function asOptionalNonNegativeInt(value: unknown): number | undefined {
+  if (value === undefined || value === null || value === '') return undefined
+  const parsed = Number(value)
+  if (!Number.isInteger(parsed) || parsed < 0) return undefined
+  return parsed
 }
 
 function getCoverImageFileFromMulter(req: Request): ParsedBlogRequest['coverImageFile'] {
@@ -56,6 +64,7 @@ export function buildParsedBlogFromRequest(req: Request): ParsedBlogRequest {
       content: asOptionalString(raw.content),
       coverImage: asOptionalString(raw.coverImage),
       status: statusRaw && isBlogStatus(statusRaw) ? statusRaw : undefined,
+      aiCoverGenerationCount: asOptionalNonNegativeInt(raw.aiCoverGenerationCount),
     },
     coverImageFile: getCoverImageFileFromMulter(req),
   }
@@ -95,6 +104,7 @@ export function parseBlogRequest(req: Request): ParsedBlogRequest {
       content: asOptionalString(raw.content),
       coverImage: asOptionalString(raw.coverImage),
       status: statusRaw && isBlogStatus(statusRaw) ? statusRaw : undefined,
+      aiCoverGenerationCount: asOptionalNonNegativeInt(raw.aiCoverGenerationCount),
     },
   }
 }

@@ -49,20 +49,6 @@ export default function ForgotPassword() {
         <div className="rounded-lg border border-tsai-accent-cyan/30 bg-tsai-accent/10 px-4 py-3 text-sm text-tsai-muted">
           A reset link was sent to <span className="font-medium text-tsai-text">{email}</span>.
           Check your inbox and spam folder.
-          {email.includes('yopmail.com') ? (
-            <span className="mt-2 block text-xs text-tsai-subtle">
-              Yopmail: open{' '}
-              <a
-                href={`https://yopmail.com/?${email.split('@')[0]}`}
-                target="_blank"
-                rel="noreferrer"
-                className="text-tsai-accent-cyan hover:underline"
-              >
-                yopmail.com
-              </a>{' '}
-              and enter your inbox name to read the message.
-            </span>
-          ) : null}
         </div>
 
         <p className="mt-4 text-center text-xs text-tsai-subtle">

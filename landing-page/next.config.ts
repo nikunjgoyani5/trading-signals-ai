@@ -1,7 +1,18 @@
 import type { NextConfig } from "next";
 
+const apiProxyTarget = (
+  process.env.API_PROXY_TARGET ?? "http://localhost:5001"
+).replace(/\/$/, "");
+
 const nextConfig: NextConfig = {
-  /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: `${apiProxyTarget}/api/:path*`,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

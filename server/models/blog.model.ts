@@ -5,6 +5,8 @@ export interface IBlog extends Document {
   title: string
   content: string
   coverImage?: string
+  /** Successful AI cover image generations for this blog (lifetime). */
+  aiCoverGenerationCount: number
   slug?: string
   status: BlogStatus
   publishedAt?: Date
@@ -18,6 +20,7 @@ const blogSchema = new Schema<IBlog>(
     title: { type: String, required: true, trim: true },
     content: { type: String, required: true, trim: true },
     coverImage: { type: String, required: false, trim: true },
+    aiCoverGenerationCount: { type: Number, default: 0, min: 0 },
     slug: { type: String, unique: true, sparse: true, trim: true },
     status: {
       type: String,

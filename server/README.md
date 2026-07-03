@@ -1,65 +1,81 @@
-# Trading Signals AI - Server API
+# Trading Signal Admin — API Server
 
-Node.js + Express + TypeScript backend for admin auth, dashboard metrics, blog CRUD, and AI generation endpoints.
+Node.js + Express + TypeScript API with a layered, production-oriented layout.
 
-## Stack
+## Structure
 
-- Express 4
-- TypeScript
-- MongoDB + Mongoose
-- Zod validation
-- JWT auth (access + refresh)
-- Cloudinary uploads
+| Folder | Purpose |
+|--------|---------|
+| `config/` | Environment and database configuration |
+| `constants/` | Shared constants (HTTP status codes, etc.) |
+| `controllers/` | HTTP layer — parse request, call services, send response |
+| `middlewares/` | Cross-cutting request pipeline (errors, validation) |
+| `models/` | Data models / schemas (DB layer) |
+| `routes/` | Route definitions mapped to controllers |
+| `services/` | Business logic |
+| `types/` | TypeScript types and declarations |
+| `utils/` | Reusable helpers (errors, API responses, logging) |
+| `validations/` | Request validation schemas (Zod) |
 
-## Local setup
+## Scripts
 
 ```bash
 npm install
 cp .env.example .env
-npm run dev
+npm run dev      # development with hot reload
+npm run build    # compile to dist/
+npm start        # run compiled output
 ```
 
-## Scripts
+Use `DB_URI` in your `.env` file for the MongoDB connection string.
 
-- `npm run dev` - tsx watch mode
-- `npm run build` - compile TypeScript
-- `npm start` - run compiled output
-- `npm run typecheck` - type validation
+## API (summary)
 
-## Core API routes
+| Method | Path | Auth | Purpose |
+|--------|------|------|---------|
+| GET | `/api/health` | No | Health check (`dbConnected`) |
+| POST | `/api/inquiries` | No | Submit contact form |
+| GET | `/api/inquiries` | Yes | List enquiries (admin) |
+| PATCH | `/api/inquiries/:id/status` | Yes | Update enquiry status |
+| * | `/api/auth/*` | Mixed | Login, refresh, password reset |
+| * | `/api/blogs/*` | Mixed | Admin CRUD + public blog APIs |
+| * | `/api/dashboard/*` | Yes | Dashboard metrics |
+| * | `/api/generate-blog` | Yes | AI blog generation |
+| * | `/api/generate-image` | Yes | AI cover image generation |
 
-- `/api/health`
-- `/api/auth/*`
-- `/api/dashboard/*`
-- `/api/blogs/*`
-- `/api/generate-blog`
-- `/api/generate-image`
+Full handover: `../TECHNICAL_HANDOVER.md`
 
-## Environment highlights
+## Email diagnostics
 
-Required from `.env.example`:
+```bash
+npm run check:email
+npm run test:inquiry-email
+```
 
-- `DB_URI`
-- `JWT_ACCESS_SECRET`, `JWT_REFRESH_SECRET`
-- `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`
-- `CORS_ORIGIN`, `CLIENT_URL`
-- `ADMIN_EMAIL`, `ADMIN_PASSWORD`
+## Vercel deployment (server)
 
-Optional:
+The **bypass token is only for the client** (Vercel Deployment Protection). The server does **not** need `x-vercel-protection-bypass` in its env.
 
-- `OPENAI_API_KEY`, `OPENAI_IMAGE_MODEL`
-- `BREVO_API_KEY`, `BREVO_SENDER_EMAIL`, `BREVO_SENDER_NAME`
+Set these on the **server** Vercel project:
 
-## Runtime notes
+| Variable | Required | Notes |
+|----------|----------|--------|
+| `DB_URI` | Yes | MongoDB Atlas URI — **not** `localhost` |
+| `JWT_ACCESS_SECRET` | Yes | Min 16 characters |
+| `JWT_REFRESH_SECRET` | Yes | Min 16 characters |
+| `CLOUDINARY_CLOUD_NAME` | Yes | |
+| `CLOUDINARY_API_KEY` | Yes | |
+| `CLOUDINARY_API_SECRET` | Yes | |
+| `CORS_ORIGIN` | Yes | Your client URL(s), comma-separated |
+| `CLIENT_URL` | Yes | Same as client URL |
+| `ADMIN_EMAIL` / `ADMIN_PASSWORD` | Yes | Default admin created on first boot |
 
-- Startup bootstraps DB connection, legacy blog status migration, and default admin creation.
-- API is mounted under `/api` in `app.ts`.
-- `vercel.json` routes all traffic to `api/index.ts` for serverless deployment.
+In **MongoDB Atlas** → Network Access → allow `0.0.0.0/0` (or Vercel IPs) so serverless functions can connect.
 
-## Deployment notes
+After deploy, check:
 
-- Deployment is currently manual and managed on an internal server.
-- Current API base (provided operationally): `http://64.227.173.140:5020/api/`
-- MongoDB database name in use: `ts-stage` (credentials omitted; configure via `DB_URI` in `.env`)
-- Do not store secrets or admin passwords in repository files.
+```
+GET /api/health
+```
 
+If `dbConnected: false`, login will return 500 until `DB_URI` is fixed.

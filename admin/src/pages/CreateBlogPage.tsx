@@ -9,9 +9,10 @@ import {
   useGenerateCoverImageMutation,
 } from '../redux/api/blogsApi'
 import { getApiErrorMessage } from '../utils/apiError'
-import { extractTitleFromHtml, prepareBlogHtmlForSave } from '../utils/blogContent'
+import { extractTitleFromHtml, prepareBlogHtmlForSave, buildCoverImageTopic } from '../utils/blogContent'
+import { MAX_BLOG_AI_COVER_GENERATIONS } from '../constants/blogCoverGeneration'
 
-const MAX_IMAGE_REGEN = 3
+const MAX_IMAGE_REGEN = MAX_BLOG_AI_COVER_GENERATIONS
 
 export default function CreateBlogPage() {
   const navigate = useNavigate()
@@ -33,7 +34,12 @@ export default function CreateBlogPage() {
 
   const handleImageGenerate = async () => {
     const topic = prompt.trim() || lastPrompt.trim()
-    if (!topic) {
+    const imagePrompt = buildCoverImageTopic({
+      content: blogContent,
+      topic,
+      fallback: topic,
+    })
+    if (!imagePrompt) {
       setActionError('Enter a blog topic before generating a cover image.')
       return
     }
@@ -41,7 +47,7 @@ export default function CreateBlogPage() {
 
     setActionError(null)
     try {
-      const result = await generateImage({ prompt: topic }).unwrap()
+      const result = await generateImage({ prompt: imagePrompt }).unwrap()
       setCoverImage(result.url)
       setRegenCount((count) => count + 1)
     } catch (error) {
@@ -80,6 +86,7 @@ export default function CreateBlogPage() {
         status,
         title,
         coverImage: coverImage || undefined,
+        aiCoverGenerationCount: regenCount > 0 ? regenCount : undefined,
       }).unwrap()
 
       navigate('/admin/blogs', { replace: true })
@@ -89,8 +96,8 @@ export default function CreateBlogPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl space-y-6">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+    <div className="blog-edit-layout mx-auto flex max-w-7xl flex-col gap-6">
+      <div className="shrink-0 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.18em] text-tsai-accent-cyan">
             Content
@@ -109,13 +116,13 @@ export default function CreateBlogPage() {
       </div>
 
       {actionError && (
-        <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+        <div className="shrink-0 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
           {actionError}
         </div>
       )}
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] xl:items-start">
-        <div className="space-y-5 xl:sticky xl:top-6">
+      <div className="blog-edit-grid grid min-h-0 flex-1 gap-6 xl:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] xl:items-stretch">
+        <div className="space-y-5 xl:sticky xl:top-6 xl:max-h-full xl:overflow-y-auto xl:overscroll-contain blog-preview-scroll">
           <BlogGenerationForm
             prompt={prompt}
             onPromptChange={setPrompt}
@@ -133,7 +140,8 @@ export default function CreateBlogPage() {
           />
         </div>
 
-        <BlogCreatePreviewPanel
+        <div className="flex min-h-0 min-w-0 flex-col">
+          <BlogCreatePreviewPanel
           content={blogContent}
           isLoading={isGeneratingContent}
           isSaving={isSaving}
@@ -141,6 +149,7 @@ export default function CreateBlogPage() {
           onSaveDraft={() => void saveBlog('draft')}
           onPublish={() => void saveBlog('published')}
         />
+        </div>
       </div>
     </div>
   )

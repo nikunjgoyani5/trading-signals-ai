@@ -3,6 +3,7 @@ import {
   LayoutDashboard,
   FileText,
   WandSparkles,
+  MessageSquare,
   X,
   type LucideIcon,
 } from 'lucide-react'
@@ -100,6 +101,12 @@ function SidebarContent({ onNavigate, showClose, onClose }: SidebarContentProps)
       <nav className="flex-1 space-y-1 overflow-y-auto p-4">
         <SidebarItem to="/admin/dashboard" label="Dashboard" icon={LayoutDashboard} onNavigate={onNavigate} />
         <SidebarItem to="/admin/blogs" label="All Blogs" icon={FileText} end onNavigate={onNavigate} />
+        <SidebarItem
+          to="/admin/enquiries"
+          label="Enquiries"
+          icon={MessageSquare}
+          onNavigate={onNavigate}
+        />
         <SidebarItem
           to="/admin/blogs/create"
           label="Generate Blog"

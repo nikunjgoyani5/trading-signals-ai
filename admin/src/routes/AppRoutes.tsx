@@ -5,6 +5,7 @@ import AllBlogs from '../pages/AllBlogs'
 import CreateBlogPage from '../pages/CreateBlogPage'
 import Dashboard from '../pages/Dashboard'
 import EditBlogPage from '../pages/EditBlogPage'
+import EnquiriesPage from '../pages/EnquiriesPage'
 import ForgotPassword from '../pages/ForgotPassword'
 // import LandingPage from '../pages/LandingPage'
 import Login from '../pages/Login'
@@ -60,6 +61,10 @@ const AppRoutes = createBrowserRouter([
           {
             path: 'blogs/edit/:blogId',
             element: <EditBlogPage />,
+          },
+          {
+            path: 'enquiries',
+            element: <EnquiriesPage />,
           },
         ],
       },

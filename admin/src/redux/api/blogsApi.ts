@@ -23,6 +23,7 @@ export type CreateBlogRequest = {
   title?: string
   coverImage?: string
   coverImageFile?: File
+  aiCoverGenerationCount?: number
 }
 
 type ApiWrapper<T> = {
@@ -161,11 +162,14 @@ export const blogsApi = createApi({
         body: { prompt },
       }),
     }),
-    generateCoverImage: builder.mutation<{ url: string }, { prompt: string }>({
-      query: ({ prompt }) => ({
+    generateCoverImage: builder.mutation<
+      { url: string; aiCoverGenerationCount?: number; maxAiCoverGenerations?: number },
+      { prompt: string; blogId?: string }
+    >({
+      query: ({ prompt, blogId }) => ({
         url: '/generate-image',
         method: 'POST',
-        body: { prompt },
+        body: { prompt, ...(blogId ? { blogId } : {}) },
       }),
     }),
     createBlog: builder.mutation<Blog, CreateBlogRequest>({
@@ -176,6 +180,10 @@ export const blogsApi = createApi({
 
         if (payload.title?.trim()) {
           formData.append('title', payload.title.trim())
+        }
+
+        if (payload.aiCoverGenerationCount !== undefined && payload.aiCoverGenerationCount > 0) {
+          formData.append('aiCoverGenerationCount', String(payload.aiCoverGenerationCount))
         }
 
         if (payload.coverImageFile) {

@@ -10,6 +10,7 @@ export type ApiBlogDocument = {
   slug?: string
   content?: string
   coverImage?: string
+  aiCoverGenerationCount?: number
   status?: BlogStatus
   publishedAt?: string
   archivedAt?: string
@@ -32,6 +33,7 @@ export type Blog = {
   slug: string
   content: string
   coverImage: string
+  aiCoverGenerationCount: number
   status: BlogStatus
   publishedAt: string
   archivedAt: string

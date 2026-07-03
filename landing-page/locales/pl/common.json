@@ -4,6 +4,7 @@
         "strategies": "Strategie",
         "testimonials": "Opinie",
         "blog": "Blog",
+        "contact": "Kontakt",
         "faq": "FAQ",
         "login": "Zaloguj się",
         "signup": "Zarejestruj się",
@@ -311,6 +312,34 @@
         "heading": "Gotowy na transformację swojego handlu?",
         "description": "Dołącz do tysięcy zyskownych traderów, którzy na co dzień korzystają z sygnałów opartych na sztucznej inteligencji, aby podejmować trafniejsze decyzje.",
         "cta": "Rozpocznij handel"
+    },
+    "contactPage": {
+        "badge": "Kontakt",
+        "title": "Skontaktuj się z nami",
+        "description": "Napisz do nas w sprawie wsparcia, współpracy lub pytań o Trading Signals AI.",
+        "form": {
+            "firstName": "Imię",
+            "firstNamePlaceholder": "Wpisz swoje imię",
+            "lastName": "Nazwisko",
+            "lastNamePlaceholder": "Wpisz swoje nazwisko",
+            "email": "Adres e-mail",
+            "emailPlaceholder": "Wpisz swój adres e-mail",
+            "phone": "Numer telefonu",
+            "phonePlaceholder": "Twój numer telefonu",
+            "message": "Wiadomość",
+            "messagePlaceholder": "Napisz swoją wiadomość...",
+            "submit": "Wyślij",
+            "submitting": "Wysyłanie...",
+            "successMessage": "Twoja wiadomość została odebrana i wygenerowano zgłoszenie.",
+            "ticketLabel": "Zgłoszenie: {{ticket}}",
+            "errorMessage": "Coś poszło nie tak. Spróbuj ponownie później.",
+            "errors": {
+                "required": "To pole jest wymagane.",
+                "emailInvalid": "Wpisz prawidłowy adres e-mail.",
+                "phoneInvalid": "Wpisz prawidłowy numer telefonu dla wybranego kraju.",
+                "messageMin": "Wiadomość musi mieć co najmniej 10 znaków."
+            }
+        }
     },
     "footer": {
         "description": "Sygnały kryptowalutowe oparte na AI dla mądrzejszych decyzji. Zaufało nam ponad 12 000 traderów na całym świecie.",

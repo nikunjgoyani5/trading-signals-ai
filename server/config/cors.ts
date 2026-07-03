@@ -17,6 +17,10 @@ function collectExplicitOrigins(): Set<string> {
     origins.add(normalizeOrigin(env.CLIENT_URL))
   }
 
+  if (env.LANDING_PAGE_URL) {
+    origins.add(normalizeOrigin(env.LANDING_PAGE_URL))
+  }
+
   return origins
 }
 
@@ -28,10 +32,35 @@ const VERCEL_APP_ORIGIN = /^https:\/\/[\w-]+\.vercel\.app$/i
 /** Team-specific Vercel URLs */
 const VERCEL_TEAM_ORIGIN = /^https:\/\/[\w-]+-manav01logicgo-3215s-projects\.vercel\.app$/i
 
+/** Production landing site */
+const TRADING_SIGNALS_ORIGIN =
+  /^https:\/\/([\w-]+\.)?tradingsignals\.ai$/i
+
+function isLocalDevOrigin(origin: string): boolean {
+  if (env.NODE_ENV !== 'development') {
+    return false
+  }
+
+  try {
+    const { hostname } = new URL(origin)
+    return hostname === 'localhost' || hostname === '127.0.0.1'
+  } catch {
+    return false
+  }
+}
+
 function isAllowedOrigin(origin: string): boolean {
   const normalized = normalizeOrigin(origin)
 
   if (explicitOrigins.has(normalized)) {
+    return true
+  }
+
+  if (isLocalDevOrigin(normalized)) {
+    return true
+  }
+
+  if (TRADING_SIGNALS_ORIGIN.test(normalized)) {
     return true
   }
 
